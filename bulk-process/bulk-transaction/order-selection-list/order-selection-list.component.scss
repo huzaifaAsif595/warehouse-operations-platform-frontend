@@ -1,0 +1,15 @@
+.count-table-scrollbar{
+    height: calc(33vh - 60px);
+}
+.verify-table-height{
+    height: calc(60vh - 60px);
+}
+.round{
+    border-radius: 999px !important;
+}
+.mat-table{
+    background: transparent;
+}
+.custom-add-button-color {
+    color: var(--clr-primary-500);
+}

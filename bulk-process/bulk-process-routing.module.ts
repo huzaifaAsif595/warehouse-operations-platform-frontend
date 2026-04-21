@@ -1,0 +1,55 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { BulkProcessComponent } from './bulk-process.component'; 
+import { AuthGuardGuard } from '../common/guard/auth-guard.guard';
+import { PreferencesComponent } from './preferences/preferences.component';
+import { ConfirmationGuard } from '../common/guard/confirmation-guard.guard';
+import { BulkVerificationGuard } from '../common/guard/bulk-verification.guard';
+
+const routes: Routes = [
+{ 
+  path: '', 
+  component: BulkProcessComponent, 
+  canActivate: [AuthGuardGuard],
+
+}  ,
+{
+  path: 'Preferences',
+  component: PreferencesComponent,
+  canActivate: [AuthGuardGuard],
+},
+{
+  path: 'BulkCount',
+  loadChildren: () =>
+    import('./bulk-transaction/bulk-transaction.module').then((m) => m.BulkTransactionModule),
+    canDeactivate: [BulkVerificationGuard],
+  canActivate: [AuthGuardGuard], 
+  data: {title: 'Bulk Count'}
+},  
+{
+  path: 'BulkPick',
+  loadChildren: () =>
+    import('./bulk-transaction/bulk-transaction.module').then((m) => m.BulkTransactionModule),
+    canDeactivate: [BulkVerificationGuard],
+  canActivate: [AuthGuardGuard], 
+  data: {title: 'Bulk Pick'}
+},  
+{
+  path: 'BulkPutAway',
+  loadChildren: () =>
+    import('./bulk-transaction/bulk-transaction.module').then((m) => m.BulkTransactionModule),
+    canDeactivate: [BulkVerificationGuard],
+  canActivate: [AuthGuardGuard], 
+  data: {title: 'Bulk Put Away'}
+},  
+]
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class BulkProcessRoutingModule { 
+ 
+
+
+}
